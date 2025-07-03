@@ -1,1 +1,107 @@
+@import './style/reset';
+
+$athlete-size: 200px;
+$athlete-gap: 30px;
+$athlete-radius: 50%;
+$athlete-hover-radius: 20%;
+$athlete-min-height: 280px;
+$athlete-extra-height: 2.2em;
+$athlete-rank-size: 32px;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.athletes {
+  display: grid;
+  grid-template-columns: repeat(2, $athlete-size);
+  column-gap: $athlete-gap;
+  row-gap: 0;
+  margin: 30px 0;
+  justify-content: center;
+  align-items: start;
+}
+
+@media (min-width: 1000px) {
+  .athletes {
+    grid-template-columns: repeat(4, $athlete-size);
+  }
+}
+
+.athlete {
+  position: relative;
+  width: $athlete-size;
+  min-height: $athlete-min-height;
+  z-index: 1;
+  transition: 
+    transform 2s cubic-bezier(0.4,0,0.2,1), 
+    box-shadow 0.2s;
+
+  &__photo {
+    width: $athlete-size;
+    height: $athlete-size;
+    border-radius: $athlete-radius;
+    overflow: hidden;
+    transition: border-radius 1s ease;
+  }
+
+  &__rank {
+    position: absolute;
+    @include flex-center;
+    width: $athlete-rank-size;
+    height: $athlete-rank-size;
+    top: 84px;
+    right: 10px;
+    background: #fff;
+    border-radius: 50%;
+  }
+
+  &__details {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+  }
+
+  &__name {
+    font-weight: 700;   
+    font-size: 20px;
+    line-height: 100%;
+    color: #2F4F4F;
+    text-align: center;
+    margin: 8px 0 0 0;
+  }
+
+  &__extra {
+    font-weight: 400;
+    font-size: 21.6px;
+    line-height: 100%;
+    color: #000;
+    text-align: center;
+    margin-top: 8px;
+    position: static;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s, height 0.3s;
+    z-index: 20;
+  }
+
+  &:hover {    
+    background: #EEE;
+    border-radius: 10px;
+    transform: scale(1.2);
+    z-index: 10;
+
+    .athlete__extra {
+      opacity: 1;
+      height: $athlete-extra-height;
+      overflow: visible;
+    }
+
+    .athlete__photo {
+      border-radius: $athlete-hover-radius;
+    }
+  }
+}
 
