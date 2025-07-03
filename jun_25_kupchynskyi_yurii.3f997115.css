@@ -48,32 +48,38 @@ body {
 }
 
 .athletes {
-  flex-wrap: wrap;
-  gap: 30px;
-  margin: 30px 35px;
-  display: flex;
+  grid-template-columns: repeat(2, 200px);
+  justify-content: center;
+  align-items: start;
+  gap: 0 30px;
+  margin: 30px 0;
+  display: grid;
 }
 
-.athletes:after {
-  content: "";
-  flex: auto;
+@media (width >= 1000px) {
+  .athletes {
+    grid-template-columns: repeat(4, 200px);
+  }
 }
 
 .athlete {
+  z-index: 1;
   width: 200px;
+  min-height: 280px;
+  transition: transform 2s cubic-bezier(.4, 0, .2, 1), box-shadow .2s;
   position: relative;
 }
 
 .athlete__photo {
-  border: 3px solid #d16e11;
   border-radius: 50%;
   width: 200px;
   height: 200px;
+  transition: border-radius 1s;
   overflow: hidden;
 }
 
 .athlete__rank {
-  background-color: #fff;
+  background: #fff;
   border-radius: 50%;
   justify-content: center;
   align-items: center;
@@ -86,26 +92,48 @@ body {
 }
 
 .athlete__details {
+  text-align: center;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .athlete__name {
   color: #2f4f4f;
   text-align: center;
-  margin-top: 8px;
+  margin: 8px 0 0;
   font-size: 20px;
   font-weight: 700;
   line-height: 100%;
-  display: block;
 }
 
 .athlete__extra {
   color: #000;
   text-align: center;
+  opacity: 0;
+  z-index: 20;
+  height: 0;
   margin-top: 8px;
   font-size: 21.6px;
   font-weight: 400;
   line-height: 100%;
-  display: block;
+  transition: opacity .3s, height .3s;
+  position: static;
+  overflow: hidden;
+}
+
+.athlete:hover {
+  z-index: 10;
+  background: #eee;
+  border-radius: 10px;
+  transform: scale(1.2);
+}
+
+.athlete:hover .athlete__extra {
+  opacity: 1;
+  height: 2.2em;
+  overflow: visible;
+}
+
+.athlete:hover .athlete__photo {
+  border-radius: 20%;
 }
 /*# sourceMappingURL=jun_25_kupchynskyi_yurii.3f997115.css.map */
